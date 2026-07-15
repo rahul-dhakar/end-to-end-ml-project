@@ -1,1 +1,304 @@
-<h1>Welcome to the home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Exam Performance Indicator</title>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --accent: #7c3aed;
+        --accent-light: #a855f7;
+        --bg-dark: #0f0c29;
+    }
+
+    body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #4f46e5, #7c3aed);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        padding: 40px 20px;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.35;
+        z-index: 0;
+        animation: float 10s ease-in-out infinite;
+    }
+
+    .orb1 {
+        width: 300px;
+        height: 300px;
+        background: #a855f7;
+        top: -80px;
+        left: -80px;
+        animation-delay: 0s;
+    }
+
+    .orb2 {
+        width: 250px;
+        height: 250px;
+        background: #4f46e5;
+        bottom: -60px;
+        right: -60px;
+        animation-delay: 3s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(30px, -30px) scale(1.1); }
+    }
+
+    .card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 560px;
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: cardEntrance 0.7s ease forwards;
+    }
+
+    @keyframes cardEntrance {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 48px 36px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,0.04) 0px,
+            rgba(255,255,255,0.04) 2px,
+            transparent 2px,
+            transparent 12px
+        );
+        animation: shimmer 20s linear infinite;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        100% { transform: translate(50px, 50px) rotate(360deg); }
+    }
+
+    .card-header .icon {
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 20px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        position: relative;
+        z-index: 1;
+        animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+        50% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+    }
+
+    .card-header h1 {
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .card-header p {
+        font-size: 14px;
+        opacity: 0.9;
+        font-weight: 300;
+        max-width: 380px;
+        margin: 0 auto;
+        line-height: 1.5;
+        position: relative;
+        z-index: 1;
+    }
+
+    .card-body {
+        padding: 36px;
+    }
+
+    .features {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 28px;
+        text-align: left;
+    }
+
+    .feature {
+        flex: 1;
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px 14px;
+        opacity: 0;
+        transform: translateY(15px);
+        animation: featureIn 0.5s ease forwards;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .feature:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 10px 20px rgba(124, 58, 237, 0.12);
+    }
+
+    .feature:nth-child(1) { animation-delay: 0.3s; }
+    .feature:nth-child(2) { animation-delay: 0.42s; }
+    .feature:nth-child(3) { animation-delay: 0.54s; }
+
+    @keyframes featureIn {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feature .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-bottom: 8px;
+    }
+
+    .feature p {
+        font-size: 12.5px;
+        color: #4b5563;
+        line-height: 1.4;
+    }
+
+    .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 15px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        background-size: 200% 200%;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+        letter-spacing: 0.02em;
+        opacity: 0;
+        animation: featureIn 0.5s ease forwards;
+        animation-delay: 0.65s;
+    }
+
+    .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 25px rgba(124, 58, 237, 0.4);
+        background-position: 100% 50%;
+    }
+
+    .btn-cta:active {
+        transform: translateY(-1px);
+    }
+
+    .btn-cta .arrow {
+        transition: transform 0.2s ease;
+    }
+
+    .btn-cta:hover .arrow {
+        transform: translateX(4px);
+    }
+
+    @media (max-width: 480px) {
+        .features {
+            flex-direction: column;
+        }
+
+        .card-header, .card-body {
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="icon">📊</div>
+            <h1>Student Exam Performance Indicator</h1>
+            <p>Predict a student's Math score using academic &amp; demographic factors, powered by machine learning</p>
+        </div>
+
+        <div class="card-body">
+            <div class="features">
+                <div class="feature">
+                    <div class="dot"></div>
+                    <p>Uses gender, ethnicity &amp; parental education</p>
+                </div>
+                <div class="feature">
+                    <div class="dot"></div>
+                    <p>Factors in lunch type &amp; test prep course</p>
+                </div>
+                <div class="feature">
+                    <div class="dot"></div>
+                    <p>Instant prediction from reading &amp; writing scores</p>
+                </div>
+            </div>
+
+            <a class="btn-cta" href="{{ url_for('predict_datapoint') }}">
+                Get Started <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
