@@ -1,11 +1,11 @@
-seaborn
-matplotlib
+seaborn==0.13.2
+matplotlib==3.7.5
 pandas==2.0.3
 numpy==1.24.4
 scikit-learn==1.3.2
+catboost==1.2.10
+xgboost==2.1.4
 dill==0.4.0
 Flask==3.0.3
 gunicorn==26.0.0
-catboost==1.2.10
-xgboost==2.1.4
 -e .
